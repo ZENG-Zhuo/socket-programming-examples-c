@@ -1,4 +1,6 @@
 #include "server.h"
+#include <iostream>
+using namespace std;
 
 Server::Server(int port) {
     // setup variables
@@ -85,11 +87,13 @@ Server::handle(int client) {
         // break if client is done or an error occurred
         if (request.empty())
             break;
+        cout << "Message received: " << request << endl;
         // send response
         bool success = send_response(client,request);
         // break if an error occurred
         if (not success)
             break;
+        cout << "Message send: " << request << endl;
     }
     close(client);
 }
